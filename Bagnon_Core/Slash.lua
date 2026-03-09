@@ -8,7 +8,7 @@ function BagnonSlash_DisplayHelp()
 	BagnonMsg(BAGNON_HELP_HELP);
 	BagnonMsg(BAGNON_HELP_SHOWBAGS);
 	BagnonMsg(BAGNON_HELP_SHOWBANK);
-	
+
 	if( IsAddOnLoaded("Bagnon_Forever") ) then
 		BagnonMsg(BAGNON_FOREVER_HELP_DELETE_CHARACTER);
 	end
@@ -31,7 +31,7 @@ SlashCmdList["BagnonCOMMAND"] = function(msg)
 			table.insert(args, word);
 		end
 		local cmd = string.lower(args[1]);
-		
+
 		if(cmd == BAGNON_COMMAND_HELP) then
 			BagnonSlash_DisplayHelp();
 		elseif(cmd == BAGNON_COMMAND_SHOWBANK) then
@@ -52,3 +52,19 @@ end
 
 SLASH_BagnonCOMMAND1 = "/bagnon";
 SLASH_BagnonCOMMAND2 = "/bgn";
+
+--always-available proxy commands for Banknon (LoadOnDemand)
+SlashCmdList["BanknonProxyCOMMAND"] = function(msg)
+	if(not IsAddOnLoaded("Banknon") ) then
+		LoadAddOn("Banknon");
+	end
+
+	if(Banknon_HandleSlash) then
+		Banknon_HandleSlash(msg);
+	else
+		BagnonMsg("Unable to load Banknon slash commands");
+	end
+end
+
+SLASH_BanknonProxyCOMMAND1 = "/banknon";
+SLASH_BanknonProxyCOMMAND2 = "/bnk";
