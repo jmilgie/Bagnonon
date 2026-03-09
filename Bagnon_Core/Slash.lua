@@ -54,7 +54,7 @@ SLASH_BagnonCOMMAND1 = "/bagnon";
 SLASH_BagnonCOMMAND2 = "/bgn";
 
 --always-available proxy commands for Banknon (LoadOnDemand)
-SlashCmdList["BANKNONPROXY"] = function(msg)
+SlashCmdList["BanknonProxyCOMMAND"] = function(msg)
 	if(not IsAddOnLoaded("Banknon") ) then
 		LoadAddOn("Banknon");
 	end
@@ -66,5 +66,5 @@ SlashCmdList["BANKNONPROXY"] = function(msg)
 	end
 end
 
-SLASH_BANKNONPROXY1 = "/banknon";
-SLASH_BANKNONPROXY2 = "/bnk";
+SLASH_BanknonProxyCOMMAND1 = "/banknon";
+SLASH_BanknonProxyCOMMAND2 = "/bnk";
