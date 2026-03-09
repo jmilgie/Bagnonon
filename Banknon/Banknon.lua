@@ -15,8 +15,6 @@ local BANKNON_GROUPING_HELP = {
 
 local BANKNON_GROUP_GAP_ROWS = 1;
 local BANKNON_EDITOR_MAX_ROWS = 8;
-local BANKNON_LAYOUT_TOP = 46;
-local BANKNON_FRAME_BASE_HEIGHT = 79;
 
 --[[ Loading Functions ]]--
 
@@ -201,7 +199,7 @@ local function Banknon_UpdateFrameSizeForGrouping(frame, rows)
 		frame:SetWidth((37 + space) * cols + 16 - space);
 	end
 
-	local height = (37 + space) * rows + BANKNON_FRAME_BASE_HEIGHT - space;
+	local height = (37 + space) * rows + 64 - space;
 	local bagFrame = getglobal(frame:GetName() .. "Bags");
 
 	if(bagFrame and bagFrame:IsShown() ) then
@@ -219,7 +217,7 @@ end
 local function Banknon_UpdateSummaryText(usedTotal, totalSlots, groupsShown)
 	if(not Banknon.summaryText) then
 		Banknon.summaryText = Banknon:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall");
-		Banknon.summaryText:SetPoint("BOTTOMLEFT", Banknon, "BOTTOMLEFT", 178, 9);
+		Banknon.summaryText:SetPoint("BOTTOMRIGHT", Banknon, "BOTTOMRIGHT", -12, 8);
 		Banknon.summaryText:SetTextColor(0.9, 0.9, 0.9);
 	end
 
@@ -268,7 +266,7 @@ function Banknon_ApplyGroupingLayout()
 
 	if(not Banknon.totalSlotsText) then
 		Banknon.totalSlotsText = Banknon:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall");
-		Banknon.totalSlotsText:SetPoint("BOTTOMLEFT", Banknon, "BOTTOMLEFT", 92, 9);
+		Banknon.totalSlotsText:SetPoint("TOPRIGHT", Banknon, "TOPRIGHT", -28, -18);
 		Banknon.totalSlotsText:SetTextColor(1, 0.82, 0);
 	end
 
@@ -303,14 +301,14 @@ function Banknon_ApplyGroupingLayout()
 			end
 
 			label:ClearAllPoints();
-			label:SetPoint("TOPLEFT", Banknon, "TOPLEFT", 8 + col * (37 + space), -BANKNON_LAYOUT_TOP - row * (37 + space) + 12);
+			label:SetPoint("TOPLEFT", Banknon, "TOPLEFT", 8 + col * (37 + space), -31 - row * (37 + space) + 14);
 			label:Show();
 
 			while(slot <= endSlot) do
 				local button = getglobal("BanknonItem" .. slot);
 				if(button) then
 					button:ClearAllPoints();
-					button:SetPoint("TOPLEFT", Banknon, "TOPLEFT", 8 + col * (37 + space), -BANKNON_LAYOUT_TOP - row * (37 + space));
+					button:SetPoint("TOPLEFT", Banknon, "TOPLEFT", 8 + col * (37 + space), -31 - row * (37 + space));
 				end
 
 				col = col + 1;
@@ -352,7 +350,7 @@ function Banknon_ApplyGroupingLayout()
 		end
 
 		label:ClearAllPoints();
-		label:SetPoint("TOPLEFT", Banknon, "TOPLEFT", 8 + col * (37 + space), -BANKNON_LAYOUT_TOP - row * (37 + space) + 12);
+		label:SetPoint("TOPLEFT", Banknon, "TOPLEFT", 8 + col * (37 + space), -31 - row * (37 + space) + 14);
 		label:SetText("Ungrouped (" .. used .. "/" .. count .. ")");
 		label:Show();
 
@@ -360,7 +358,7 @@ function Banknon_ApplyGroupingLayout()
 			local button = getglobal("BanknonItem" .. slot);
 			if(button) then
 				button:ClearAllPoints();
-				button:SetPoint("TOPLEFT", Banknon, "TOPLEFT", 8 + col * (37 + space), -BANKNON_LAYOUT_TOP - row * (37 + space));
+				button:SetPoint("TOPLEFT", Banknon, "TOPLEFT", 8 + col * (37 + space), -31 - row * (37 + space));
 			end
 
 			col = col + 1;
